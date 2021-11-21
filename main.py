@@ -32,21 +32,35 @@ for i in yt_objects:
 
     for i in yt_objects:
         videotitel = []
+        videourl = []
+        zuladen = []
         os.chdir(i.channel_name)
         videosneu = i.videos
+        urlsneu = i.video_urls
         for x in videosneu:
             videotitel.append(x.title)  # bis hier funkt
         # print(videotitel)
+        kombi = dict(zip(videotitel, urlsneu))
+        # print(kombi)
         videosda = [os.path.splitext(filename)[0] for filename in os.listdir()]
         # print(videosda)
 
         aa = set(videotitel)
         bb = set(videosda)
         cc = aa - bb
-        print(cc)
+        for k in kombi:
+            if k not in bb:
+                zuladen.append(kombi[k])
+        for z in zuladen:
+            # print("lade " + str(len(zuladen)) + " neue videos")
+            arg = YouTube(z)
+            arg1 = arg.streams.get_highest_resolution()
+            arg1.download(filename=arg.title)
+
         os.chdir("..")
 
-# videotitel als dictionary gemeinsam mit den urls
+
+
 
 
     # for x in i.videos:
@@ -105,34 +119,7 @@ yt1.download(filename=yt.title) # er verschluckt sonst  das komma
 
 xxx = aa - bb # funktioniert nicht...
 
-for i in yt_objects:
-    videotitel = []
-    videourl = []
-    zuladen = []
-    os.chdir(i.channel_name)
-    videosneu = i.videos
-    urlsneu = i.video_urls
-    for x in videosneu:
-        videotitel.append(x.title)  # bis hier funkt
-    # print(videotitel)
-    kombi = dict(zip(videotitel, urlsneu))
-    #print(kombi)
-    videosda = [os.path.splitext(filename)[0] for filename in os.listdir()]
-    # print(videosda)
 
-    aa = set(videotitel)
-    bb = set(videosda)
-    cc = aa - bb
-    for k in kombi:
-        if k not in bb:
-            zuladen.append(kombi[k])
-    for z in zuladen:
-       # print("lade " + str(len(zuladen)) + " neue videos")
-        arg = YouTube(z)
-        arg1 = arg.streams.get_highest_resolution()
-        arg1.download(filename=arg.title)
-
-    os.chdir("..")
 
 # gibt das eine rausgefilterte video an, das schon auf der platte ist
 for k in kombi:
