@@ -21,10 +21,11 @@ for line in textfile:
 textfile.close()
 os.chdir("video")
 
-
-for a in channels:
-      yt_objects.append(Channel(a))
-  #  counter += 1
+try:
+    for a in channels:
+        yt_objects.append(Channel(a))
+except:
+    pass
 
 for i in yt_objects:
     if i.channel_name not in os.listdir():
@@ -52,7 +53,7 @@ for i in yt_objects:
             if k not in bb:
                 zuladen.append(kombi[k])
         for z in zuladen:
-            # print("lade " + str(len(zuladen)) + " neue videos")
+            print("lade " + str(len(zuladen)) + " neue videos")
             arg = YouTube(z)
             arg1 = arg.streams.get_highest_resolution()
             arg1.download(filename=arg.title)
