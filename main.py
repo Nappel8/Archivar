@@ -14,6 +14,8 @@ videosda = []
 videosneu = []
 urlsneu = []
 
+
+
 for line in textfile:
     channels.append(line)
 textfile.close()
