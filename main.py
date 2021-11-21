@@ -53,7 +53,7 @@ for i in yt_objects:
             if k not in bb:
                 zuladen.append(kombi[k])
         for z in zuladen:
-            print("lade " + str(len(zuladen)) + " neue videos")
+           # print("lade " + str(len(zuladen)) + " neue videos")
             arg = YouTube(z)
             arg1 = arg.streams.get_highest_resolution()
             arg1.download(filename=arg.title)
